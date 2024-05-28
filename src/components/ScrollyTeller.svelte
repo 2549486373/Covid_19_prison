@@ -29,7 +29,7 @@
 
   $: projection = geoMercator().fitSize([width, height], geoJsonToFit);
 
-  const sections = Array.from({ length: 26 }, (_, i) => `This is section ${i + 1}.`);
+  const sections = Array.from({ length: 30 }, (_, i) => `This is section ${i + 1}.`);
 </script>
 
 <style>
@@ -74,12 +74,12 @@
 
   .hawaii-title {
     top: 640px; /* Adjust these values to place the title appropriately */
-    left: 200px;
+    left: 180px;
   }
 
   .alaska-title {
     top: 640px; /* Adjust these values to place the title appropriately */
-    left: 30px;
+    left: 20px;
   }
 
   section {
