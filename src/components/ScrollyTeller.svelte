@@ -104,20 +104,10 @@
     <div class="title mainland-title">US Mainland</div>
     <div class="title hawaii-title">Hawaii</div>
     <div class="title alaska-title">Alaska</div>
-
-    <div class="progress-bars">
-      <p>current section: <strong>{index + 1}/{count}</strong></p>
-      <progress value={count ? (index + 1) / count : 0} />
-
-      <p>offset in current section</p>
-      <progress value={offset || 0} />
-
-      <p>total progress</p>
-      <progress value={progress || 0} />
-    </div>
   </div>
 
   <div class="sections-container">
+    
     <Scroller
       top={0.0}
       bottom={1}
@@ -127,9 +117,11 @@
       bind:offset
       bind:progress
     >
+    <div class="foreground" slot="foreground">
       {#each sections as section}
         <section>{section}</section>
       {/each}
     </Scroller>
-  </div>
+    </div>
 </div>
+
