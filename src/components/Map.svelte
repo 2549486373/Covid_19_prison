@@ -38,15 +38,15 @@
       container: alaskaContainer,
       style: "mapbox://styles/mapbox/light-v11",
       center: [-152.4044, 61.3707],
-      zoom: 2.5,
+      zoom: 1.2,
       attributionControl: false,
     });
 
     hawaiiMap = new mapboxgl.Map({
-      container: hawaiiContainer,
+    container: hawaiiContainer,
       style: "mapbox://styles/mapbox/light-v11",
-      center: [-155.5828, 19.8968],
-      zoom: 5,
+      center: [-157.5828, 19.8968],
+      zoom: 4.1,
       attributionControl: false,
     });
 
