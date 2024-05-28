@@ -52,12 +52,6 @@
     position: relative;
   }
 
-  .progress-bars {
-    position: absolute;
-    background: rgba(170, 51, 120, 0.2); /* 40% opaque */
-    visibility: visible;
-  }
-
   .title {
     position: absolute;
     font-size: 1.5em;
