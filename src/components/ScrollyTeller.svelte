@@ -73,12 +73,12 @@
   }
 
   .hawaii-title {
-    top: 350px; /* Adjust these values to place the title appropriately */
-    left: 30px;
+    top: 640px; /* Adjust these values to place the title appropriately */
+    left: 200px;
   }
 
   .alaska-title {
-    top: 510px; /* Adjust these values to place the title appropriately */
+    top: 640px; /* Adjust these values to place the title appropriately */
     left: 30px;
   }
 
