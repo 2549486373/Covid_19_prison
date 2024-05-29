@@ -1,10 +1,10 @@
 export const manifest = {
 	appDir: "_app",
-	appPath: "Covid_19_prison/_app",
+	appPath: "_app",
 	assets: new Set(["favicon.png"]),
 	mimeTypes: {".png":"image/png"},
 	_: {
-		client: {"start":{"file":"_app/immutable/entry/start.f94dad54.js","imports":["_app/immutable/entry/start.f94dad54.js","_app/immutable/chunks/index.8802f197.js","_app/immutable/chunks/singletons.747b4547.js"],"stylesheets":[],"fonts":[]},"app":{"file":"_app/immutable/entry/app.358642bb.js","imports":["_app/immutable/entry/app.358642bb.js","_app/immutable/chunks/index.8802f197.js"],"stylesheets":[],"fonts":[]}},
+		client: {"start":{"file":"_app/immutable/entry/start.f03e28ba.js","imports":["_app/immutable/entry/start.f03e28ba.js","_app/immutable/chunks/index.8802f197.js","_app/immutable/chunks/singletons.e74807de.js"],"stylesheets":[],"fonts":[]},"app":{"file":"_app/immutable/entry/app.de2a8b74.js","imports":["_app/immutable/entry/app.de2a8b74.js","_app/immutable/chunks/index.8802f197.js"],"stylesheets":[],"fonts":[]}},
 		nodes: [
 			() => import('./nodes/0.js'),
 			() => import('./nodes/1.js'),
