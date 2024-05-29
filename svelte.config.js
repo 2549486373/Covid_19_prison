@@ -15,7 +15,7 @@ const config = {
 			entries: ['*'] // Add dynamic routes here
 		},
 		paths: {
-			base: '',
+			base: '/COVID_19_PRISON',
 			assets: ''
 		}
 	},
