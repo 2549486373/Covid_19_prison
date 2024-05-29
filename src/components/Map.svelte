@@ -25,6 +25,9 @@
   }
 
   onMount(() => {
+    console.log("-----------");
+    console.log(index);
+    console.log("-----------");
     updateZoomLevel();
     map = new mapboxgl.Map({
       container,

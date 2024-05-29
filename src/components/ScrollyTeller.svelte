@@ -29,7 +29,7 @@
 
   $: projection = geoMercator().fitSize([width, height], geoJsonToFit);
 
-  const sections = Array.from({ length: 30 }, (_, i) => `This is section ${i + 1}.`);
+  const sections = Array.from({ length: 26 }, (_, i) => `This is section ${i + 1}.`);
 </script>
 
 <style>
@@ -52,6 +52,12 @@
     position: relative;
   }
 
+  /*.progress-bars {*/
+  /*  position: absolute;*/
+  /*  background: rgba(170, 51, 120, 0.2); !* 40% opaque *!*/
+  /*  visibility: visible;*/
+  /*}*/
+
   .title {
     position: absolute;
     font-size: 1.5em;
@@ -60,7 +66,6 @@
     padding: 0.2em;
     border-radius: 0.2em;
   }
-  
 
   .mainland-title {
     top: 10px;
@@ -69,12 +74,12 @@
 
   .hawaii-title {
     top: 640px; /* Adjust these values to place the title appropriately */
-    left: 180px;
+    left: 200px;
   }
 
   .alaska-title {
     top: 640px; /* Adjust these values to place the title appropriately */
-    left: 20px;
+    left: 30px;
   }
 
   section {
@@ -112,11 +117,12 @@
       bind:offset
       bind:progress
     >
-    <div class="foreground" slot="foreground">
-      {#each sections as section}
-        <section>{section}</section>
-      {/each}
+      <div class="foreground" slot="foreground">
+        {#each sections as section}
+          <section>{section}</section>
+        {/each}
+      </div>
     </Scroller>
-    </div>
-</div>
 
+  </div>
+</div>
