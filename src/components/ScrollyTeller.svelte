@@ -60,6 +60,7 @@
     padding: 0.2em;
     border-radius: 0.2em;
   }
+  
 
   .mainland-title {
     top: 10px;

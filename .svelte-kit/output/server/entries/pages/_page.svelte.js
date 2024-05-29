@@ -113,7 +113,7 @@ const Map$1 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 });
 const ScrollyTeller_svelte_svelte_type_style_lang = "";
 const css = {
-  code: ".container.svelte-7ru0ed{display:flex;width:100%;height:100vh}.map-container.svelte-7ru0ed{width:75%;height:100vh;position:relative}.sections-container.svelte-7ru0ed{width:25%;height:100vh;overflow-y:auto;position:relative}.title.svelte-7ru0ed{position:absolute;font-size:1.5em;font-weight:bold;background:rgba(255, 255, 255, 0.7);padding:0.2em;border-radius:0.2em}.mainland-title.svelte-7ru0ed{top:10px;left:10px}.hawaii-title.svelte-7ru0ed{top:640px;left:180px}.alaska-title.svelte-7ru0ed{top:640px;left:20px}section.svelte-7ru0ed{height:40vh;text-align:center;max-width:750px;color:black;padding:1em;margin:0 0 2em 0}",
+  code: ".container.svelte-1j29wax{display:flex;width:100%;height:100vh}.map-container.svelte-1j29wax{width:75%;height:100vh;position:relative}.sections-container.svelte-1j29wax{width:25%;height:100vh;overflow-y:auto;position:relative}.title.svelte-1j29wax{position:absolute;font-size:1.5em;font-weight:bold;background:rgba(255, 255, 255, 0.7);padding:0.2em;border-radius:0.2em}.mainland-title.svelte-1j29wax{top:10px;left:10px}.hawaii-title.svelte-1j29wax{top:640px;left:180px}.alaska-title.svelte-1j29wax{top:640px;left:20px}section.svelte-1j29wax{height:40vh;text-align:center;max-width:750px;color:black;padding:1em;margin:0 0 2em 0}",
   map: null
 };
 const ScrollyTeller = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -139,7 +139,7 @@ const ScrollyTeller = create_ssr_component(($$result, $$props, $$bindings, slots
   do {
     $$settled = true;
     geoMercator().fitSize([width, height], geoJsonToFit);
-    $$rendered = `<div class="container svelte-7ru0ed"><div class="map-container svelte-7ru0ed">${validate_component(Map$1, "Map").$$render(
+    $$rendered = `<div class="container svelte-1j29wax"><div class="map-container svelte-1j29wax">${validate_component(Map$1, "Map").$$render(
       $$result,
       { index, geoJsonToFit },
       {
@@ -152,11 +152,11 @@ const ScrollyTeller = create_ssr_component(($$result, $$props, $$bindings, slots
     )}
     
 
-    <div class="title mainland-title svelte-7ru0ed">US Mainland</div>
-    <div class="title hawaii-title svelte-7ru0ed">Hawaii</div>
-    <div class="title alaska-title svelte-7ru0ed">Alaska</div></div>
+    <div class="title mainland-title svelte-1j29wax">US Mainland</div>
+    <div class="title hawaii-title svelte-1j29wax">Hawaii</div>
+    <div class="title alaska-title svelte-1j29wax">Alaska</div></div>
 
-  <div class="sections-container svelte-7ru0ed">${validate_component(Scroller, "Scroller").$$render(
+  <div class="sections-container svelte-1j29wax">${validate_component(Scroller, "Scroller").$$render(
       $$result,
       {
         top: 0,
@@ -188,7 +188,7 @@ const ScrollyTeller = create_ssr_component(($$result, $$props, $$bindings, slots
       {
         foreground: () => {
           return `<div class="foreground" slot="foreground">${each(sections, (section) => {
-            return `<section class="svelte-7ru0ed">${escape(section)}</section>`;
+            return `<section class="svelte-1j29wax">${escape(section)}</section>`;
           })}</div>`;
         }
       }
