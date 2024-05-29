@@ -1,5 +1,5 @@
 import { c as create_ssr_component, a as setContext, v as validate_component, m as missing_component } from "./index.js";
-let base = "";
+let base = "/Covid_19_prison";
 let assets = base;
 const initial = { base, assets };
 function reset() {
@@ -168,7 +168,7 @@ const options = {
 		<div class="error">\r
 			<span class="status">` + status + '</span>\r\n			<div class="message">\r\n				<h1>' + message + "</h1>\r\n			</div>\r\n		</div>\r\n	</body>\r\n</html>\r\n"
   },
-  version_hash: "fvl26x"
+  version_hash: "1ac3l12"
 };
 function get_hooks() {
   return {};
