@@ -1,4 +1,4 @@
-<script>
+<!-- <script>
   import Scroller from "@sveltejs/svelte-scroller";
   import Map from "./Map.svelte";
   import Graph from "./Graph.svelte";
@@ -44,7 +44,7 @@
     { text: "Things become better after 2023", showGraphs: false, showButton: false }
   ];
 
-  const dataUrls = ['/data/us.csv'];
+  const dataUrls = ['./src/data/us.csv'];
 
   function togglePlots(i) {
     showPlots[i] = !showPlots[i];
@@ -215,4 +215,4 @@
       </div>
     </Scroller>
   </div>
-</div>
+</div> -->
