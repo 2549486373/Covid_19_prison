@@ -1,6 +1,7 @@
 <script>
   import mapboxgl from "mapbox-gl";
   import { onMount } from "svelte";
+  export let data2020;
   export let index;
   export let geoJsonToFit;
 
@@ -69,7 +70,7 @@
     function addCountyBoundaries(mapInstance) {
       mapInstance.addSource('county-boundaries', {
         type: 'geojson',
-        data: 'https://raw.githubusercontent.com/plotly/datasets/master/geojson-counties-fips.json' // replace with your county boundaries GeoJSON URL if different
+        data: 'https://raw.githubusercontent.com/plotly/datasets/master/geojson-counties-fips.json'
       });
 
       mapInstance.addLayer({
@@ -87,10 +88,9 @@
     map.on("load", () => {
       hideLabelLayers(map);
 
-      // Add state and county boundaries
       map.addSource('state-boundaries', {
         type: 'geojson',
-        data: 'https://docs.mapbox.com/mapbox-gl-js/assets/us_states.geojson' // replace with your state boundaries GeoJSON URL if different
+        data: 'https://docs.mapbox.com/mapbox-gl-js/assets/us_states.geojson' 
       });
 
       map.addLayer({
@@ -137,11 +137,6 @@
 
   let isVisible = true;
 
-  // $: if (index >= 2) {
-  //   isVisible = true;
-  // } else {
-  //   isVisible = false;
-  // }
 </script>
 
 <svelte:head>
