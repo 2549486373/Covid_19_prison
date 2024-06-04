@@ -250,9 +250,9 @@
   <div class="info-box">
     {#if hoveredCounty}
       <div>
-        <h3>{hoveredCounty.county}, {hoveredCounty.state}</h3>
-        <p>Cases per day: {hoveredCounty.cases_per_day}</p>
-        <p>Total cases: {hoveredCounty.cases}</p>
+        <h3>County: {hoveredCounty.county}, State: {hoveredCounty.state}</h3>
+        <p>Average Cases Per Day: {hoveredCounty.cases_per_day}</p>
+        <p>Total Cases: {hoveredCounty.cases}</p>
       </div>
     {/if}
   </div>

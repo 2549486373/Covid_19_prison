@@ -2,7 +2,7 @@
   import Scroller from "@sveltejs/svelte-scroller";
   import Map from "./components/Map.svelte";
   import Graph from "./components/Graph.svelte";
-  import { geoMercator } from "d3-geo";
+  // import { geoMercator } from "d3-geo";
   import { fade } from "svelte/transition";
 
   let count, index, offset, progress;
@@ -144,11 +144,13 @@
 </style>
 
 <div class="container">
+  <div class="title mainland-title">US Mainland</div>
+  <div class="title hawaii-title">Hawaii</div>
+  <div class="title alaska-title">Alaska</div>
   <div class="map-container" bind:clientWidth={width} bind:clientHeight={height}>
-    <Map bind:geoJsonToFit {index}/>
-    <div class="title mainland-title">US Mainland</div>
-    <div class="title hawaii-title">Hawaii</div>
-    <div class="title alaska-title">Alaska</div>
+    <Map 
+    bind:geoJsonToFit 
+    {index}/>
   </div>
 
   <div class="sections-container">
