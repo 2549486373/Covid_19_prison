@@ -13,8 +13,7 @@
     .then(response => response.json())
     .then(data => {
       data2020 = data;
-  });
-  console.log(data2020)
+  }); 
   let geoJsonToFit = {
     type: "FeatureCollection",
     features: [
@@ -45,7 +44,7 @@
     { text: "Things become better after 2023", showGraphs: false, showButton: false }
   ];
 
-  const dataUrls = ['public/data/us.csv'];
+  const dataUrls = ['/data/us.csv'];
 
   function togglePlots(i) {
     showPlots[i] = !showPlots[i];
