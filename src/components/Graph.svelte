@@ -11,6 +11,7 @@
   export let endDate;
   export let graphLabel;
 
+
   let canvas;
   let chart;
   const parseDate = timeParse("%Y-%m-%d");

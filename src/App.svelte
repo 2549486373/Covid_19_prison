@@ -2,12 +2,12 @@
   import Scroller from "@sveltejs/svelte-scroller";
   import Map from "./components/Map.svelte";
   import Graph from "./components/Graph.svelte";
-  // import { geoMercator } from "d3-geo";
   import { fade } from "svelte/transition";
 
-  let count, index, offset, progress;
+  let count, index = 0, offset, progress; // Initialize index to 0
   let width, height;
   let showPlots = [false, false, false, false, false]; 
+  let scroller; // Reference to Scroller component
 
   let geoJsonToFit = {
     type: "FeatureCollection",
@@ -42,8 +42,142 @@
   function togglePlots(i) {
     showPlots[i] = !showPlots[i];
   }
+
+  // Function to increment the index and scroll to the next section
+  async function incrementIndex() {
+    if (index < sections.length - 1) {
+      index += 1;
+      const nextSection = document.querySelector(`.section-${index}`);
+      nextSection.scrollIntoView({ behavior: 'smooth' });
+      await loadData(); // Load data when incrementing index
+    }
+    console.log(data[0])
+  }
+
+  // Function to decrement the index and scroll to the previous section
+  async function decrementIndex() {
+    if (index > 0) {
+      index -= 1;
+      const prevSection = document.querySelector(`.section-${index}`);
+      prevSection.scrollIntoView({ behavior: 'smooth' });
+      await loadData(); // Load data when decrementing index
+    }
+    console.log(data[0])
+  }
+
+  let url;
+  let data = []; // Declare data at the top level
+  let url_lst = [
+    'public/data/average_cases_per_day_2020.json',
+    'public/data/average_cases_per_day_2021.json',
+    'public/data/average_cases_per_day_2022.json',
+  ];
+
+  // Function to load data based on the current index
+  async function loadData() {
+    if (index <= 1) {
+      url = url_lst[0];
+    } else if (index === 2) {
+      url = url_lst[1];
+    } else {
+      url = url_lst[2];
+    }
+    data = await fetchData(url);
+  }
+
+  // Function to fetch data from a URL
+  async function fetchData(url) {
+    const response = await fetch(url);
+    return await response.json();
+  }
+
+  loadData(); 
 </script>
 
+
+
+<div class="container">
+  <div class="title mainland-title">US Mainland</div>
+  <div class="title hawaii-title">Hawaii</div>
+  <div class="title alaska-title">Alaska</div>
+  <div class="map-container" bind:clientWidth={width} bind:clientHeight={height}>
+    <Map {geoJsonToFit} {data} />
+  </div>
+
+  <div class="sections-container">
+    <Scroller
+      top={0.0}
+      bottom={1}
+      threshold={0.5}
+      bind:count
+      bind:index
+      bind:offset
+      bind:progress
+      bind:this={scroller}
+    >
+      <div class="foreground" slot="foreground">
+        {#each sections as section, i}
+        
+          <section class="section-{i}"> <!-- Add class to each section for easy selection -->
+            {#if section.showButton && !showPlots[i]}
+              <div>
+                <div>{section.text}</div>
+                <div class="button-container">
+                  <button class="show-plots-button" on:click={() => togglePlots(i)}>
+                    Show Plots
+                  </button>
+                  <!-- Button to increment index and scroll to next section -->
+                  <button class="show-plots-button" on:click={incrementIndex}>
+                    Next Section
+                  </button>
+                  <!-- Button to decrement index and scroll to previous section -->
+                  <button class="show-plots-button" on:click={decrementIndex}>
+                    Previous Section
+                  </button>
+                </div>
+              </div>
+            {/if}
+            {#if section.showGraphs && showPlots[i]}
+              <div class="graph-section" in:fade={{ duration: 1000 }} out:fade={{ duration: 1000 }}>
+                <div class="button-container">
+                  <button class="hide-plots-button" on:click={() => togglePlots(i)}>
+                    Hide Plots
+                  </button>
+                  <!-- Button to increment index and scroll to next section -->
+                  <button class="show-plots-button" on:click={incrementIndex}>
+                    Next Section
+                  </button>
+                  <!-- Button to decrement index and scroll to previous section -->
+                  <button class="show-plots-button" on:click={decrementIndex}>
+                    Previous Section
+                  </button>
+                </div>
+                <div class="graph-title">Accumulated Monthly Cases</div>
+                <div class="graph-container">
+                  <Graph {dataUrls} graphType="accumulated" startDate={section.startDate} endDate={section.endDate} graphLabel="Accumulated Cases" />
+                </div>
+                
+                <div class="graph-title">Monthly Cases Increasement</div>
+                <div class="graph-container">
+                  <Graph {dataUrls} graphType="cases" startDate={section.startDate} endDate={section.endDate} graphLabel="Monthly Cases Increasement" />
+                </div>
+                
+                <div class="graph-title">Accumulated Monthly Deaths</div>
+                <div class="graph-container">
+                  <Graph {dataUrls} graphType="accumulatedDeaths" startDate={section.startDate} endDate={section.endDate} graphLabel="Accumulated Deaths" />
+                </div>
+              </div>
+            {:else if !section.showButton}
+              <div class="text-section" in:fade={{ duration: 1000 }} out:fade={{ duration: 1000 }}>
+                {section.text}
+              </div>
+            {/if}
+          </section>
+        {/each}
+      </div>
+    </Scroller>
+  </div>
+</div>
 <style>
   html, body {
     margin: 0;
@@ -142,70 +276,3 @@
     left: 20px;
   }
 </style>
-
-<div class="container">
-  <div class="title mainland-title">US Mainland</div>
-  <div class="title hawaii-title">Hawaii</div>
-  <div class="title alaska-title">Alaska</div>
-  <div class="map-container" bind:clientWidth={width} bind:clientHeight={height}>
-    <Map 
-    bind:geoJsonToFit 
-    {index}/>
-  </div>
-
-  <div class="sections-container">
-    <Scroller
-      top={0.0}
-      bottom={1}
-      threshold={0.5}
-      bind:count
-      bind:index
-      bind:offset
-      bind:progress
-    >
-      <div class="foreground" slot="foreground">
-        {#each sections as section, i}
-          <section>
-            {#if section.showButton && !showPlots[i]}
-              <div>
-                <div>{section.text}</div>
-                <div class="button-container">
-                  <button class="show-plots-button" on:click={() => togglePlots(i)}>
-                    Show Plots
-                  </button>
-                </div>
-              </div>
-            {/if}
-            {#if section.showGraphs && showPlots[i]}
-              <div class="graph-section" in:fade={{ duration: 1000 }} out:fade={{ duration: 1000 }}>
-                <div class="button-container">
-                  <button class="hide-plots-button" on:click={() => togglePlots(i)}>
-                    Hide Plots
-                  </button>
-                </div>
-                <div class="graph-title">Accumulated Monthly Cases</div>
-                <div class="graph-container">
-                  <Graph {dataUrls} graphType="accumulated" startDate={section.startDate} endDate={section.endDate} graphLabel="Accumulated Cases" />
-                </div>
-                
-                <div class="graph-title">Monthly Cases Increasement</div>
-                <div class="graph-container">
-                  <Graph {dataUrls} graphType="cases" startDate={section.startDate} endDate={section.endDate} graphLabel="Monthly Cases Increasement" />
-                </div>
-                
-                <div class="graph-title">Accumulated Monthly Deaths</div>
-                <div class="graph-container">
-                  <Graph {dataUrls} graphType="accumulatedDeaths" startDate={section.startDate} endDate={section.endDate} graphLabel="Accumulated Deaths" />
-                </div>
-              </div>
-            {:else if !section.showButton}
-              <div class="text-section" in:fade={{ duration: 1000 }} out:fade={{ duration: 1000 }}>
-                {section.text}
-              </div>
-            {/if}
-          </section>
-        {/each}
-      </div>
-    </Scroller>
-  </div>
-</div>
