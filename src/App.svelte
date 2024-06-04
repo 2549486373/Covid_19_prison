@@ -9,12 +9,12 @@
   let width, height;
   let showPlots = [false, false, false, false, false]; 
   let data2020 = [];
-  fetch('public/data/average_cases_per_day_2020.json')
-    .then(response => response.json())
-    .then(data => {
-      data2020 = data;
-  });
-  console.log(data2020)
+  // fetch('public/data/average_cases_per_day_2020.json')
+  //   .then(response => response.json())
+  //   .then(data => {
+  //     data2020 = data;
+  // });
+  // console.log(data2020)
   let geoJsonToFit = {
     type: "FeatureCollection",
     features: [
