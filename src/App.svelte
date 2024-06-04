@@ -8,13 +8,7 @@
   let count, index, offset, progress;
   let width, height;
   let showPlots = [false, false, false, false, false]; 
-  let data2020 = [];
-  // fetch('public/data/average_cases_per_day_2020.json')
-  //   .then(response => response.json())
-  //   .then(data => {
-  //     data2020 = data;
-  // });
-  // console.log(data2020)
+
   let geoJsonToFit = {
     type: "FeatureCollection",
     features: [
@@ -34,8 +28,6 @@
       },
     ],
   };
-  
-  $: projection = geoMercator().fitSize([width, height], geoJsonToFit);
 
   const sections = [
     { text: "First case of Covid 19 happens on 2020-01-21", showGraphs: false, showButton: false },
@@ -51,8 +43,6 @@
     showPlots[i] = !showPlots[i];
   }
 </script>
-
-
 
 <style>
   html, body {
@@ -155,7 +145,7 @@
 
 <div class="container">
   <div class="map-container" bind:clientWidth={width} bind:clientHeight={height}>
-    <Map bind:geoJsonToFit {index} {data2020}/>
+    <Map bind:geoJsonToFit {index}/>
     <div class="title mainland-title">US Mainland</div>
     <div class="title hawaii-title">Hawaii</div>
     <div class="title alaska-title">Alaska</div>
