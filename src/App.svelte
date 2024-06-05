@@ -66,9 +66,7 @@
 
 
 
-<div class="title mainland-title">US Mainland</div>
-<div class="title hawaii-title">Hawaii</div>
-<div class="title alaska-title">Alaska</div>
+
 
 <Scroller
   top={0.0}
@@ -81,6 +79,9 @@
   bind:this={scroller}
 >
   <div class="map-container" bind:clientWidth={width} bind:clientHeight={height} slot = "background">
+    <div class="title mainland-title">US Mainland</div>
+    <div class="title hawaii-title">Hawaii</div>
+    <div class="title alaska-title">Alaska</div>
     <Map {geoJsonToFit} {index} />
   </div> 
   <div class="sections-container" slot="foreground">
@@ -166,6 +167,7 @@
   .map-container {
     width: 70%;
     height: 100vh;
+    left : 30%;
     position: relative;
   }
 
@@ -174,6 +176,7 @@
     height: 100vh;
     overflow-y: auto;
     position: relative;
+    right: 0; 
     scroll-snap-type: y mandatory;
   }
 
@@ -194,6 +197,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    
   }
 
   .graph-container {
@@ -207,7 +211,7 @@
     font-weight: bold;
     margin-top: 0.5em;
   }
-  
+
   .button-container {
     text-align: center;
     margin-top: 1em;
