@@ -1,8 +1,38 @@
 <script>
   import mapboxgl from "mapbox-gl";
   import { onMount, afterUpdate } from "svelte";
-  export let data;
+  export let index;
   export let geoJsonToFit;
+  let year;
+  let url = 'public/data/year.json';
+  let data = [];
+  let currentData = [];
+
+  // Function to fetch data from a URL
+  async function fetchData(url) {
+    const response = await fetch(url);
+    return await response.json();
+  }
+
+  // Fetch all data once on component mount
+  onMount(async () => {
+    data = await fetchData(url);
+    queryData();
+    initializeMaps(); // Initialize maps with the initial data
+  });
+
+  // Function to query data based on the current year
+  function queryData() {
+    if (index <= 1) {
+      year = 2020;
+    } else if (index === 2) {
+      year = 2021;
+    } else {
+      year = 2022;
+    }
+    currentData = data.filter(item => item.year === year);
+    updateMaps(); // Update maps with the new data
+  }
 
   mapboxgl.accessToken =
     "pk.eyJ1IjoiMjU0OTQ4NjM3MyIsImEiOiJjbHcyc2pvdnMwcHRyMmp0aTF2Zm9uMG1jIn0.5jMEYh4ZzoZT0-SDWUfVqA";
@@ -41,7 +71,7 @@
 
       countyGeoJSON.features.forEach((feature) => {
         const fips = parseInt(feature.id, 10);
-        const countyData = data.find(item => item.fips === fips);
+        const countyData = currentData.find(item => item.fips === fips);
         feature.properties.cases_per_day = countyData ? countyData.cases_per_day : 0;
         feature.properties.county = countyData ? countyData.county : '';
         feature.properties.state = countyData ? countyData.state : '';
@@ -58,9 +88,6 @@
   let countyGeoJSON;
 
   async function initializeMaps() {
-    const casesPerDay = data.map(d => d.cases_per_day);
-    const [min, p15, p30, p50, p75, max] = calculatePercentiles(casesPerDay, [0, 0.15, 0.30, 0.50, 0.75, 1.0]);
-
     countyGeoJSON = await fetchAndPrepareGeoJSON(); // Fetch and prepare GeoJSON data
 
     if (!countyGeoJSON) {
@@ -69,6 +96,7 @@
     }
 
     updateZoomLevel();
+
     map = new mapboxgl.Map({
       container,
       style: "mapbox://styles/mapbox/light-v11",
@@ -180,29 +208,36 @@
       hideLabelLayers(alaskaMap);
       addCountyBoundaries(alaskaMap);
       colorCounties(alaskaMap); // Color counties in Alaska map
+      addHoverEffect(alaskaMap); // Add hover effect to show county information
     });
 
     hawaiiMap.on("load", () => {
       hideLabelLayers(hawaiiMap);
       addCountyBoundaries(hawaiiMap);
       colorCounties(hawaiiMap); // Color counties in Hawaii map
+      addHoverEffect(hawaiiMap); // Add hover effect to show county information
     });
   }
 
-  onMount(() => {
-    initializeMaps();
-  });
+  function updateMaps() {
+    fetchAndPrepareGeoJSON().then(updatedGeoJSON => {
+      if (updatedGeoJSON) {
+        countyGeoJSON = updatedGeoJSON;
+        if (map && map.getSource('county-boundaries')) {
+          map.getSource('county-boundaries').setData(countyGeoJSON);
+        }
+        if (alaskaMap && alaskaMap.getSource('county-boundaries')) {
+          alaskaMap.getSource('county-boundaries').setData(countyGeoJSON);
+        }
+        if (hawaiiMap && hawaiiMap.getSource('county-boundaries')) {
+          hawaiiMap.getSource('county-boundaries').setData(countyGeoJSON);
+        }
+      }
+    });
+  }
 
   afterUpdate(() => {
-    if (map && map.getSource('county-boundaries')) {
-      map.getSource('county-boundaries').setData(countyGeoJSON);
-    }
-    if (alaskaMap && alaskaMap.getSource('county-boundaries')) {
-      alaskaMap.getSource('county-boundaries').setData(countyGeoJSON);
-    }
-    if (hawaiiMap && hawaiiMap.getSource('county-boundaries')) {
-      hawaiiMap.getSource('county-boundaries').setData(countyGeoJSON);
-    }
+    queryData();
   });
 
   function updateBounds() {

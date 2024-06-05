@@ -30,11 +30,11 @@
   };
 
   const sections = [
-    { text: "First case of Covid 19 happens on 2020-01-21", showGraphs: false, showButton: false },
+    { text: "First case of Covid 19 happens on 2020-01-21", showGraphs: false, showButton: true },
     { text: "Year 2020", startDate: "2020-01-01", endDate: "2020-12-31", showGraphs: true, showButton: true },
     { text: "Year 2021", startDate: "2021-01-01", endDate: "2021-12-31", showGraphs: true, showButton: true },
     { text: "Year 2022", startDate: "2022-01-01", endDate: "2022-12-31", showGraphs: true, showButton: true },
-    { text: "Things become better after 2023", showGraphs: false, showButton: false }
+    { text: "Things become better after 2023", showGraphs: false, showButton: true }
   ];
 
   const dataUrls = ['public/data/us.csv'];
@@ -49,9 +49,7 @@
       index += 1;
       const nextSection = document.querySelector(`.section-${index}`);
       nextSection.scrollIntoView({ behavior: 'smooth' });
-      await loadData(); // Load data when incrementing index
     }
-    console.log(data[0])
   }
 
   // Function to decrement the index and scroll to the previous section
@@ -60,124 +58,96 @@
       index -= 1;
       const prevSection = document.querySelector(`.section-${index}`);
       prevSection.scrollIntoView({ behavior: 'smooth' });
-      await loadData(); // Load data when decrementing index
     }
-    console.log(data[0])
   }
-
-  let url;
-  let data = []; // Declare data at the top level
-  let url_lst = [
-    'public/data/average_cases_per_day_2020.json',
-    'public/data/average_cases_per_day_2021.json',
-    'public/data/average_cases_per_day_2022.json',
-  ];
-
-  // Function to load data based on the current index
-  async function loadData() {
-    if (index <= 1) {
-      url = url_lst[0];
-    } else if (index === 2) {
-      url = url_lst[1];
-    } else {
-      url = url_lst[2];
-    }
-    data = await fetchData(url);
-  }
-
-  // Function to fetch data from a URL
-  async function fetchData(url) {
-    const response = await fetch(url);
-    return await response.json();
-  }
-
-  loadData(); 
 </script>
 
+<div class="title mainland-title">US Mainland</div>
+<div class="title hawaii-title">Hawaii</div>
+<div class="title alaska-title">Alaska</div>
 
-
-<div class="container">
-  <div class="title mainland-title">US Mainland</div>
-  <div class="title hawaii-title">Hawaii</div>
-  <div class="title alaska-title">Alaska</div>
-  <div class="map-container" bind:clientWidth={width} bind:clientHeight={height}>
-    <Map {geoJsonToFit} {data} />
-  </div>
-
-  <div class="sections-container">
-    <Scroller
-      top={0.0}
-      bottom={1}
-      threshold={0.5}
-      bind:count
-      bind:index
-      bind:offset
-      bind:progress
-      bind:this={scroller}
-    >
-      <div class="foreground" slot="foreground">
-        {#each sections as section, i}
-        
-          <section class="section-{i}"> <!-- Add class to each section for easy selection -->
-            {#if section.showButton && !showPlots[i]}
-              <div>
-                <div>{section.text}</div>
-                <div class="button-container">
-                  <button class="show-plots-button" on:click={() => togglePlots(i)}>
-                    Show Plots
-                  </button>
-                  <!-- Button to increment index and scroll to next section -->
-                  <button class="show-plots-button" on:click={incrementIndex}>
-                    Next Section
-                  </button>
-                  <!-- Button to decrement index and scroll to previous section -->
-                  <button class="show-plots-button" on:click={decrementIndex}>
-                    Previous Section
-                  </button>
-                </div>
-              </div>
+<Scroller
+  top={0.0}
+  bottom={1}
+  threshold={0.5}
+  bind:count
+  bind:index
+  bind:offset
+  bind:progress
+  bind:this={scroller}
+>
+  <div class="map-container" bind:clientWidth={width} bind:clientHeight={height} slot="background">
+    <Map {geoJsonToFit} {index} />
+  </div> 
+  <div class="sections-container" slot="foreground">
+    {#each sections as section, i}
+      <section class="section-{i}"> 
+        <div>
+          <div>{section.text}</div>
+          <div class="button-container">
+            {#if section.showButton}
+              {#if i === 0}
+                <button class="show-plots-button" on:click={incrementIndex}>
+                  Next Section
+                </button>
+              {/if}
+              {#if i === sections.length - 1}
+                <button class="show-plots-button" on:click={decrementIndex}>
+                  Previous Section
+                </button>
+              {/if}
             {/if}
-            {#if section.showGraphs && showPlots[i]}
-              <div class="graph-section" in:fade={{ duration: 1000 }} out:fade={{ duration: 1000 }}>
-                <div class="button-container">
-                  <button class="hide-plots-button" on:click={() => togglePlots(i)}>
-                    Hide Plots
-                  </button>
-                  <!-- Button to increment index and scroll to next section -->
-                  <button class="show-plots-button" on:click={incrementIndex}>
-                    Next Section
-                  </button>
-                  <!-- Button to decrement index and scroll to previous section -->
-                  <button class="show-plots-button" on:click={decrementIndex}>
-                    Previous Section
-                  </button>
-                </div>
-                <div class="graph-title">Accumulated Monthly Cases</div>
-                <div class="graph-container">
-                  <Graph {dataUrls} graphType="accumulated" startDate={section.startDate} endDate={section.endDate} graphLabel="Accumulated Cases" />
-                </div>
-                
-                <div class="graph-title">Monthly Cases Increasement</div>
-                <div class="graph-container">
-                  <Graph {dataUrls} graphType="cases" startDate={section.startDate} endDate={section.endDate} graphLabel="Monthly Cases Increasement" />
-                </div>
-                
-                <div class="graph-title">Accumulated Monthly Deaths</div>
-                <div class="graph-container">
-                  <Graph {dataUrls} graphType="accumulatedDeaths" startDate={section.startDate} endDate={section.endDate} graphLabel="Accumulated Deaths" />
-                </div>
-              </div>
-            {:else if !section.showButton}
-              <div class="text-section" in:fade={{ duration: 1000 }} out:fade={{ duration: 1000 }}>
-                {section.text}
-              </div>
+            {#if section.showButton && !showPlots[i] && i !== 0 && i !== sections.length - 1}
+              <button class="show-plots-button" on:click={() => togglePlots(i)}>
+                Show Plots
+              </button>
+              <button class="show-plots-button" on:click={incrementIndex}>
+                Next Section
+              </button>
+              <button class="show-plots-button" on:click={decrementIndex}>
+                Previous Section
+              </button>
             {/if}
-          </section>
-        {/each}
-      </div>
-    </Scroller>
+          </div>
+        </div>
+        {#if section.showGraphs && showPlots[i]}
+          <div class="graph-section" in:fade={{ duration: 1000 }} out:fade={{ duration: 1000 }}>
+            <div class="button-container">
+              <button class="hide-plots-button" on:click={() => togglePlots(i)}>
+                Hide Plots
+              </button>
+              <button class="show-plots-button" on:click={incrementIndex}>
+                Next Section
+              </button>
+              <button class="show-plots-button" on:click={decrementIndex}>
+                Previous Section
+              </button>
+            </div>
+            <div class="graph-title">Accumulated Monthly Cases</div>
+            <div class="graph-container">
+              <Graph {dataUrls} graphType="accumulated" startDate={section.startDate} endDate={section.endDate} graphLabel="Accumulated Cases" />
+            </div>
+            
+            <div class="graph-title">Monthly Cases Increasement</div>
+            <div class="graph-container">
+              <Graph {dataUrls} graphType="cases" startDate={section.startDate} endDate={section.endDate} graphLabel="Monthly Cases Increasement" />
+            </div>
+            
+            <div class="graph-title">Accumulated Monthly Deaths</div>
+            <div class="graph-container">
+              <Graph {dataUrls} graphType="accumulatedDeaths" startDate={section.startDate} endDate={section.endDate} graphLabel="Accumulated Deaths" />
+            </div>
+          </div>
+        {:else if !section.showButton}
+          <div class="text-section" in:fade={{ duration: 1000 }} out:fade={{ duration: 1000 }}>
+            {section.text}
+          </div>
+        {/if}
+      </section>
+    {/each}
   </div>
-</div>
+</Scroller>
+
 <style>
   html, body {
     margin: 0;
@@ -185,12 +155,6 @@
     width: 100%;
     height: 100%;
     overflow: hidden;
-  }
-
-  .container {
-    display: flex;
-    width: 100%;
-    height: 100vh; 
   }
 
   .map-container {
@@ -208,16 +172,17 @@
   }
 
   section {
-    height: 100vh;
-    text-align: center;
-    max-width: 750px;
-    color: black;
-    padding: 1em;
-    margin: 0;
-    scroll-snap-align: start;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    height: 100vh; /* Set the height of the section to 100% of the viewport height */
+    text-align: right; /* Right-align the text horizontally within the section */
+    max-width: 750px; /* Set a maximum width of 750 pixels for the section */
+    color: black; /* Set the text color to black */
+    padding: 1em; /* Add padding of 1em around the content inside the section */
+    margin: 0; /* Remove any default margin and ensure the section is aligned to the right */
+    scroll-snap-align: start; /* Align the section to the start when scroll snapping */
+    display: flex; /* Use flexbox layout for the section */
+    flex-direction: column; /* Arrange flex items (children) in a column */
+    justify-content: center; /* Center the flex items (children) vertically within the section */
+    align-items: flex-end; /* Align the flex items (children) to the right */
   }
 
   .graph-section {
