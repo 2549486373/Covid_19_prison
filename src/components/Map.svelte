@@ -279,6 +279,7 @@
 </div>
 
 <style>
+
   .map-container {
     position: relative;
     width: 100%;

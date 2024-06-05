@@ -78,13 +78,14 @@
   bind:progress
   bind:this={scroller}
 >
-  <div class="map-container" bind:clientWidth={width} bind:clientHeight={height} slot = "background">
+<div class="container" slot="foreground">
+  <div class="map-container" bind:clientWidth={width} bind:clientHeight={height}>
     <div class="title mainland-title">US Mainland</div>
     <div class="title hawaii-title">Hawaii</div>
     <div class="title alaska-title">Alaska</div>
     <Map {geoJsonToFit} {index} />
   </div> 
-  <div class="sections-container" slot="foreground">
+  <div class="sections-container" >
     {#each sections as section, i}
     
       <section class="section-{i}"> 
@@ -152,6 +153,7 @@
       </section>
     {/each}
   </div>
+</div>
 </Scroller>
 
 <style>
@@ -162,12 +164,16 @@
     height: 100%;
     overflow: hidden;
   }
+  .container {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+  }
 
 
   .map-container {
     width: 70%;
     height: 100vh;
-    left : 30%;
     position: relative;
   }
 
