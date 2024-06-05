@@ -60,7 +60,11 @@
       prevSection.scrollIntoView({ behavior: 'smooth' });
     }
   }
+
+
 </script>
+
+
 
 <div class="title mainland-title">US Mainland</div>
 <div class="title hawaii-title">Hawaii</div>
@@ -76,11 +80,12 @@
   bind:progress
   bind:this={scroller}
 >
-  <div class="map-container" bind:clientWidth={width} bind:clientHeight={height} slot="background">
+  <div class="map-container" bind:clientWidth={width} bind:clientHeight={height} slot = "background">
     <Map {geoJsonToFit} {index} />
   </div> 
   <div class="sections-container" slot="foreground">
     {#each sections as section, i}
+    
       <section class="section-{i}"> 
         <div>
           <div>{section.text}</div>
@@ -157,6 +162,7 @@
     overflow: hidden;
   }
 
+
   .map-container {
     width: 70%;
     height: 100vh;
@@ -172,17 +178,16 @@
   }
 
   section {
-    height: 100vh; /* Set the height of the section to 100% of the viewport height */
-    text-align: right; /* Right-align the text horizontally within the section */
-    max-width: 750px; /* Set a maximum width of 750 pixels for the section */
-    color: black; /* Set the text color to black */
-    padding: 1em; /* Add padding of 1em around the content inside the section */
-    margin: 0; /* Remove any default margin and ensure the section is aligned to the right */
-    scroll-snap-align: start; /* Align the section to the start when scroll snapping */
-    display: flex; /* Use flexbox layout for the section */
-    flex-direction: column; /* Arrange flex items (children) in a column */
-    justify-content: center; /* Center the flex items (children) vertically within the section */
-    align-items: flex-end; /* Align the flex items (children) to the right */
+    height: 100vh;
+    text-align: center;
+    max-width: 750px;
+    color: black;
+    padding: 1em;
+    margin: 0;
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
   .graph-section {
@@ -202,7 +207,7 @@
     font-weight: bold;
     margin-top: 0.5em;
   }
-
+  
   .button-container {
     text-align: center;
     margin-top: 1em;
