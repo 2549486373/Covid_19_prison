@@ -3,6 +3,7 @@
   import Map from "./components/Map.svelte";
   import Graph from "./components/Graph.svelte";
   import { fade } from "svelte/transition";
+  import './app.css';
 
   let count, index = 0, offset, progress; // Initialize index to 0
   let width, height;
@@ -102,7 +103,7 @@
 
   const sections = [
     { text: "First case of Covid 19 happens on 2020-01-21", showGraphs: false, showButton: true },
-    { text: 'Year 2020', startDate: "2020-01-01", endDate: "2020-12-31", showGraphs: true, showButton: true,},
+    { text: "Year 2020", startDate: "2020-01-01", endDate: "2020-12-31", showGraphs: true, showButton: true },
     { text: "Year 2021", startDate: "2021-01-01", endDate: "2021-12-31", showGraphs: true, showButton: true },
     { text: "Year 2022", startDate: "2022-01-01", endDate: "2022-12-31", showGraphs: true, showButton: true },
     { text: "Things become better after 2023", showGraphs: false, showButton: true }
@@ -134,11 +135,11 @@
 
 
 </script>
+<div class="red-background">
+  {@html string1}
+</div>
 
-<p>{@html string1}</p>
-
-
-
+<!-- <p>{@html string1}</p> -->
 
 
 <Scroller
@@ -163,6 +164,7 @@
     
       <section class="section-{i}"> 
         <div>
+          <div>{section.text}</div>
           <div class="button-container">
             {#if section.showButton}
               {#if i === 0}
@@ -220,7 +222,6 @@
         {:else if !section.showButton}
           <div class="text-section" in:fade={{ duration: 1000 }} out:fade={{ duration: 1000 }}>
             {section.text}
-
           </div>
         {/if}
       </section>
