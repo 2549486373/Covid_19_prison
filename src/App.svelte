@@ -5,10 +5,10 @@
   import { fade } from "svelte/transition";
   import './app.css';
 
-  let count, index = 0, offset, progress; // Initialize index to 0
+  let count, index = 0, offset, progress; 
   let width, height;
   let showPlots = [false, false, false, false, false]; 
-  let scroller; // Reference to Scroller component
+  let scroller; 
 
   let geoJsonToFit = {
     type: "FeatureCollection",
