@@ -425,7 +425,7 @@
 
 
   .yellow-background {
-  background-color: #e2c024;
+  background-color: #09d6dd;
   color: black;
   height: 100vh;
   margin: 0;
