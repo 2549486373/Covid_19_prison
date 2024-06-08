@@ -31,21 +31,24 @@
   };
 
   let string1 = `
-<div style="text-align: center; max-width: 600px; margin: 0 auto;">
-  <h2>COVID-19 Trends in the USA (2020-2022)</h2>
-  <p>From 2020 to 2022, COVID-19 trends in the USA showed significant shifts:</p>
-  
-  <h3>2020</h3>
-  <p>Accumulated cases and deaths rose rapidly due to uncontrolled spread and limited interventions.</p>
-  
-  <h3>2021</h3>
-  <p>Saw cyclic patterns in monthly case increases, driven by new variants like Delta and Omicron, leading to notable peaks in July and December. Accumulated deaths continued to climb, albeit at varying rates.</p>
-  
-  <h3>2022</h3>
-  <p>The trend began to stabilize with slower increases in cases and deaths, reflecting the impact of widespread vaccinations, improved treatments, and consistent public health measures.</p>
+<div style="text-align: center; max-width: 900px; margin: 0 auto;">
+  <h1>COVID-19 Trends in the USA (2020-2022)</h1>
+</div>
+
+<div style="text-align: left; max-width: 900px; margin: 0 auto;">
+  <p></p>
+  <p></p>
+  <p>    From 2020 to 2022, COVID-19 trends in the USA showed significant shifts: In 2020, Accumulated cases and deaths rose rapidly due to uncontrolled spread and limited interventions.
+    In 2021, Saw cyclic patterns in monthly case increases, driven by new variants like Delta and Omicron, leading to notable peaks in July and December. Accumulated deaths continued to climb, albeit at varying rates.
+    In 2022, The trend began to stabilize with slower increases in cases and deaths, reflecting the impact of widespread vaccinations, improved treatments, and consistent public health measures.</p>
+  <p> </p>
+</div>
+<div>
+  <p></p>
 </div>
 
 <div style="text-align: center; max-width: 600px; margin: 0 auto;">
+  
   <h2>COVID-19 Cases and Cases Per Day Statistics (2020-2022)</h2>
   <table border="1" style="margin: 0 auto; border-collapse: collapse; width: 100%;">
     <thead>
@@ -135,7 +138,7 @@
 
 
 </script>
-<div class="red-background">
+<div class="yellow-background">
   {@html string1}
 </div>
 

@@ -1,9 +1,43 @@
-.red-background {
+.body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+  }
+  
+  .container {
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .content {
+    text-align: left;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+  }
+  
+  th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+  }
+  
+  .yellow-background {
     background-color: #e2c024;
-    color: darkblack; /* Optional: to make the text readable against a red background */
-    height: 100vh; /* Optional: to cover the entire viewport height */
-    margin: 0; /* Optional: to remove default margins */
-    display: flex; /* Optional: to center content */
-    justify-content: center; /* Optional: to center content */
-    align-items: center; /* Optional: to center content */
+    color: black;
+    height: 100vh; 
+    margin: 0; 
+    display: flex; /* To enable flexbox layout */
+    flex-direction: column; /* To stack items vertically */
+    justify-content: center; /* To center content vertically */
+    align-items: center; /* To center content horizontally */
   }
