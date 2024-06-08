@@ -251,7 +251,7 @@
   .map-container {
     width: 70%;
     height: 100vh;
-    position: relative;
+    position: auto;
   }
 
   .sections-container {
@@ -331,5 +331,16 @@
   .alaska-title {
     bottom: 160px;
     left: 20px;
+  }
+
+  .yellow-background {
+    background-color: #e2c024;
+    color: black;
+    height: 100vh; 
+    margin: 0; 
+    display: flex; /* To enable flexbox layout */
+    flex-direction: column; /* To stack items vertically */
+    justify-content: center; /* To center content vertically */
+    align-items: center; /* To center content horizontally */
   }
 </style>
