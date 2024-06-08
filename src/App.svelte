@@ -243,8 +243,10 @@
   }
   .container {
     display: flex;
-    width: 100%;
+    overflow: hidden; 
     height: 100vh;
+    width: 100%;
+    position: relative;
   }
 
 
@@ -261,6 +263,7 @@
     position: relative;
     right: 0; 
     scroll-snap-type: y mandatory;
+    overflow: hidden
   }
 
   section {
