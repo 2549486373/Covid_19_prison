@@ -31,77 +31,171 @@
   };
 
   let string1 = `
-<div style="text-align: center; max-width: 900px; margin: 0 auto;">
-  <h1>COVID-19 Trends in the USA (2020-2022)</h1>
-</div>
+  <div class="container">
+    <div style="text-align: center; max-width: 900px; margin: 0 auto;">
+      <h1>COVID-19 Trends in the USA (2020-2022)</h1>
+    </div>
+    
+    <div class="content"； max-width: 1300px>
+      <p>From 2020 to 2022, COVID-19 trends in the USA showed significant shifts:</p>
+      <p>In 2020, accumulated cases and deaths rose rapidly due to uncontrolled spread and limited interventions.</p>
+      <p>In 2021, cyclic patterns in monthly case increases were driven by new variants like Delta and Omicron, leading to notable peaks in July and December. Accumulated deaths continued to climb, albeit at varying rates.</p>
+      <p>In 2022, the trend began to stabilize with slower increases in cases and deaths, reflecting the impact of widespread vaccinations, improved treatments, and consistent public health measures.</p>
+    </div>
+    
+    <div class="flex-container">
+      <div class="flex-item">
+        <h2>COVID-19 Cases and Cases Per Day Statistics 2020</h2>
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              <th>cases</th>
+              <th>cases_per_day</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>count</td>
+              <td>3,273</td>
+              <td>3,273</td>
+            </tr>
+            <tr>
+              <td>mean</td>
+              <td>5,277,388</td>
+              <td>1,525.26</td>
+            </tr>
+            <tr>
+              <td>std</td>
+              <td>22,589,660</td>
+              <td>6,528.80</td>
+            </tr>
+            <tr>
+              <td>25%</td>
+              <td>42,083</td>
+              <td>121.63</td>
+            </tr>
+            <tr>
+              <td>50%</td>
+              <td>112,280</td>
+              <td>324.51</td>
+            </tr>
+            <tr>
+              <td>75%</td>
+              <td>307,790</td>
+              <td>889.57</td>
+            </tr>
+            <tr>
+              <td>max</td>
+              <td>66,041,400</td>
+              <td>190,871.09</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-<div style="text-align: left; max-width: 900px; margin: 0 auto;">
-  <p></p>
-  <p></p>
-  <p>    From 2020 to 2022, COVID-19 trends in the USA showed significant shifts: In 2020, Accumulated cases and deaths rose rapidly due to uncontrolled spread and limited interventions.
-    In 2021, Saw cyclic patterns in monthly case increases, driven by new variants like Delta and Omicron, leading to notable peaks in July and December. Accumulated deaths continued to climb, albeit at varying rates.
-    In 2022, The trend began to stabilize with slower increases in cases and deaths, reflecting the impact of widespread vaccinations, improved treatments, and consistent public health measures.</p>
-  <p> </p>
-</div>
-<div>
-  <p></p>
-</div>
+      <div class="flex-item">
+        <h2>COVID-19 Cases and Cases Per Day Statistics 2021</h2>
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              <th>cases</th>
+              <th>cases_per_day</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>count</td>
+              <td>3,262</td>
+              <td>3,262</td>
+            </tr>
+            <tr>
+              <td>mean</td>
+              <td>4,055,527</td>
+              <td>11,111.03</td>
+            </tr>
+            <tr>
+              <td>std</td>
+              <td>15,082,000</td>
+              <td>41,320.55</td>
+            </tr>
+            <tr>
+              <td>25%</td>
+              <td>432,723</td>
+              <td>1,185.54</td>
+            </tr>
+            <tr>
+              <td>50%</td>
+              <td>1,031,272</td>
+              <td>2,825.40</td>
+            </tr>
+            <tr>
+              <td>75%</td>
+              <td>2,648,135</td>
+              <td>7,255.16</td>
+            </tr>
+            <tr>
+              <td>max</td>
+              <td>477,580,600</td>
+              <td>1,308,440</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-<div style="text-align: center; max-width: 600px; margin: 0 auto;">
-  
-  <h2>COVID-19 Cases and Cases Per Day Statistics (2020-2022)</h2>
-  <table border="1" style="margin: 0 auto; border-collapse: collapse; width: 100%;">
-    <thead>
-      <tr>
-        <th></th>
-        <th>cases</th>
-        <th>cases_per_day</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>count</td>
-        <td>9,804</td>
-        <td>9,804</td>
-      </tr>
-      <tr>
-        <td>mean</td>
-        <td>4,765,045</td>
-        <td>13,081.42</td>
-      </tr>
-      <tr>
-        <td>std</td>
-        <td>23,135,340</td>
-        <td>63,391.04</td>
-      </tr>
-      <tr>
-        <td>min</td>
-        <td>0</td>
-        <td>0</td>
-      </tr>
-      <tr>
-        <td>25%</td>
-        <td>171,608.2</td>
-        <td>487.1436</td>
-      </tr>
-      <tr>
-        <td>50%</td>
-        <td>799,195</td>
-        <td>2,203.607</td>
-      </tr>
-      <tr>
-        <td>75%</td>
-        <td>2,727,922</td>
-        <td>7,478.523</td>
-      </tr>
-      <tr>
-        <td>max</td>
-        <td>1,132,082,000</td>
-        <td>3,101,594</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+      <div class="flex-item">
+        <h2>COVID-19 Cases and Cases Per Day Statistics 2022</h2>
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              <th>cases</th>
+              <th>cases_per_day</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>count</td>
+              <td>3,269</td>
+              <td>3,269</td>
+            </tr>
+            <tr>
+              <td>mean</td>
+              <td>9,715,535</td>
+              <td>26,617.90</td>
+            </tr>
+            <tr>
+              <td>std</td>
+              <td>36,475,750</td>
+              <td>99,933.57</td>
+            </tr>
+            <tr>
+              <td>25%</td>
+              <td>991,748</td>
+              <td>2,717.12</td>
+            </tr>
+            <tr>
+              <td>50%</td>
+              <td>2,474,830</td>
+              <td>6,780.36</td>
+            </tr>
+            <tr>
+              <td>75%</td>
+              <td>6,387,470</td>
+              <td>17,499.92</td>
+            </tr>
+            <tr>
+              <td>max</td>
+              <td>1,132,082,000</td>
+              <td>3,101,594</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
 `;
 
   const sections = [
@@ -336,14 +430,16 @@
     left: 20px;
   }
 
+
   .yellow-background {
-    background-color: #e2c024;
-    color: black;
-    height: 100vh; 
-    margin: 0; 
-    display: flex; /* To enable flexbox layout */
-    flex-direction: column; /* To stack items vertically */
-    justify-content: center; /* To center content vertically */
-    align-items: center; /* To center content horizontally */
-  }
+  background-color: #e2c024;
+  color: black;
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 </style>
