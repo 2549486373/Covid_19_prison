@@ -53,7 +53,7 @@
     updateMaps();
   }
 
-  mapboxgl.accessToken = "pk.eyJ1IjoiMjU0OTQ4NjM3MyIsImEiOiJjbHcyc2pvdnMwcHRyMmp0aTF2Zm9uMG1jIn0.5jMEYh4ZzoZT0-SDWUfVqA";
+  mapboxgl.accessToken = "pk.eyJ1IjoiMjU0OTQ4NjM3MyIsImEiOiJjbHcyc2pvdnMwcHRyMmp0aTF2Zm9uMG1jIn0.5jMEYh4ZzoZT0-SDWUfVqA"; // Replace with your Mapbox token
 
   let container;
   let alaskaContainer;
@@ -206,7 +206,7 @@
           'line-color': '#FF0000', // Highlight color
           'line-width': 2
         },
-        filter: ['in', 'id', '']
+        filter: ['in', 'id', ''] // Initial empty filter
       });
     }
 
@@ -219,6 +219,12 @@
             hoveredCounty = countyId;
 
             mapInstance.setFilter('county-highlight', ['==', 'id', countyId]);
+            const properties = e.features[0].properties;
+            document.querySelector('.info-box').innerHTML = `
+              <h3>County: ${properties.county}, State: ${properties.state}</h3>
+              <p>Average Cases Per Day: ${properties.cases_per_day}</p>
+              <p>Total Cases: ${properties.cases}</p>
+            `;
           }
         }
       });
@@ -226,6 +232,7 @@
       mapInstance.on('mouseleave', 'county-data', () => {
         hoveredCounty = null;
         mapInstance.setFilter('county-highlight', ['==', 'id', '']);
+        document.querySelector('.info-box').innerHTML = '';
       });
     }
 
@@ -303,15 +310,7 @@
   <div class="map" class:visible={isVisible} bind:this={container}></div>
   <div class="inset-map alaska" bind:this={alaskaContainer}></div>
   <div class="inset-map hawaii" bind:this={hawaiiContainer}></div>
-  <div class="info-box">
-    {#if hoveredCounty}
-      <div>
-        <h3>County: {hoveredCounty.county}, State: {hoveredCounty.state}</h3>
-        <p>Average Cases Per Day: {hoveredCounty.cases_per_day}</p>
-        <p>Total Cases: {hoveredCounty.cases}</p>
-      </div>
-    {/if}
-  </div>
+  <div class="info-box"></div>
   <div class="legend">
     <h4>Legend</h4>
     {#each labels as label, index}
