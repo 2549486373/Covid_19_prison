@@ -12,11 +12,11 @@
     '#F7FCF0',  
     '#E0F3DB', 
     '#CCEBC5', 
-    '#A8DDB5', // 绿色
-    '#7BCCC4', // 浅蓝绿色
-    '#43A2CA', // 深蓝绿色
-    '#0868AC', // 深蓝色
-    '#084081'  // 深蓝黑色
+    '#A8DDB5', 
+    '#7BCCC4', 
+    '#43A2CA', 
+    '#0868AC', 
+    '#084081'
   ];
 
   const labels = [
@@ -183,39 +183,57 @@
             'interpolate',
             ['linear'],
             ['get', 'cases_per_day'],
-            0, '#F7FCF0',  // 浅绿色
-            10, '#E0F3DB', // 淡绿色
-            100, '#CCEBC5', // 中绿色
-            1000, '#A8DDB5', // 绿色
-            10000, '#7BCCC4', // 浅蓝绿色
-            100000, '#43A2CA', // 深蓝绿色
-            1000000, '#0868AC', // 深蓝色
-            3000000, '#084081'  // 深蓝黑色
+            0, '#F7FCF0',
+            10, '#E0F3DB',
+            100, '#CCEBC5',
+            1000, '#A8DDB5',
+            10000, '#7BCCC4',
+            100000, '#43A2CA',
+            1000000, '#0868AC',
+            3000000, '#084081'
           ],
           'fill-opacity': 0.7
         }
+      });
+
+      // Add highlight layer for hovered county
+      mapInstance.addLayer({
+        id: 'county-highlight',
+        type: 'line',
+        source: 'county-boundaries',
+        layout: {},
+        paint: {
+          'line-color': '#FF0000', // Highlight color
+          'line-width': 2
+        },
+        filter: ['in', 'id', '']
       });
     }
 
     function addHoverEffect(mapInstance) {
       mapInstance.on('mousemove', 'county-data', (e) => {
         if (e.features.length > 0) {
-          hoveredCounty = e.features[0].properties;
+          const countyId = e.features[0].id;
+
+          if (hoveredCounty !== countyId) {
+            hoveredCounty = countyId;
+
+            mapInstance.setFilter('county-highlight', ['==', 'id', countyId]);
+          }
         }
       });
 
       mapInstance.on('mouseleave', 'county-data', () => {
         hoveredCounty = null;
+        mapInstance.setFilter('county-highlight', ['==', 'id', '']);
       });
     }
 
     map.on("load", () => {
       hideLabelLayers(map);
-
       addCountyBoundaries(map);
       colorCounties(map);
       addHoverEffect(map);
-
       updateBounds();
       map.on("zoom", updateBounds);
       map.on("drag", updateBounds);
