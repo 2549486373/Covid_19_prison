@@ -198,12 +198,12 @@
 
 `;
 
-  const sections = [
-    { text: "First case of Covid 19 happens on 2020-01-21", showGraphs: false, showButton: true },
-    { text: "Year 2020", startDate: "2020-01-01", endDate: "2020-12-31", showGraphs: true, showButton: true },
-    { text: "Year 2021", startDate: "2021-01-01", endDate: "2021-12-31", showGraphs: true, showButton: true },
-    { text: "Year 2022", startDate: "2022-01-01", endDate: "2022-12-31", showGraphs: true, showButton: true },
-    { text: "Things become better after 2023", showGraphs: false, showButton: true }
+const sections = [
+    { text: "The first case of COVID-19 in the USA was reported on January 21, 2020. Throughout 2020, the pandemic spread rapidly across the country, resulting in exponential increases in accumulated monthly cases, especially during the spring and winter waves. Monthly case increases surged during these peaks, highlighting the virus's widespread transmission. The number of accumulated monthly deaths followed a similar pattern, with significant rises reflecting the severe impact on public health. Despite efforts to curb the spread through lockdowns, social distancing, and the introduction of vaccines towards the end of the year, the pandemic continued to pose severe challenges to the healthcare system and the overall well-being of the population.", showGraphs: false, showButton: true },
+    { text: "In 2020, the COVID-19 distribution in the USA showed a dramatic rise in accumulated monthly cases, substantial monthly case increases, and a significant number of accumulated monthly deaths, reflecting the pandemic's severe and escalating impact throughout the year.", startDate: "2020-01-01", endDate: "2020-12-31", showGraphs: true, showButton: true },
+    { text: "In 2021, the COVID-19 distribution in the USA exhibited periods of fluctuating accumulated monthly cases, significant monthly case increases during surges (notably due to variants), and continued high accumulated monthly deaths, indicating ongoing pandemic challenges despite vaccine rollout.", startDate: "2021-01-01", endDate: "2021-12-31", showGraphs: true, showButton: true },
+    { text: "In 2022, the COVID-19 distribution in the USA was characterized by a slower rise in accumulated monthly cases, smaller monthly case increases, and a reduced rate of accumulated monthly deaths, reflecting the impact of widespread vaccination and improved treatments.", startDate: "2022-01-01", endDate: "2022-12-31", showGraphs: true, showButton: true },
+    { text: "Things began to improve significantly after 2023 as the COVID-19 situation in the USA stabilized. The widespread distribution of vaccines, booster shots, and antiviral treatments greatly reduced the severity and spread of the virus. Public health measures, along with increased immunity in the population, contributed to lower monthly case numbers and a substantial decrease in monthly deaths. The healthcare system, once overwhelmed, began to recover, allowing for better management of cases and resources. While the virus continued to circulate, it posed a much-reduced threat, enabling a gradual return to normalcy and the recovery of economic and social activities.", showGraphs: false, showButton: true }
   ];
 
   const dataUrls = ['./data/us.csv'];
