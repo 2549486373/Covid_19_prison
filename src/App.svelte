@@ -206,7 +206,7 @@
     { text: "Things become better after 2023", showGraphs: false, showButton: true }
   ];
 
-  const dataUrls = ['public/data/us.csv'];
+  const dataUrls = ['./data/us.csv'];
 
   function togglePlots(i) {
     showPlots[i] = !showPlots[i];

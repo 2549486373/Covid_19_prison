@@ -4,14 +4,14 @@
   export let index;
   export let geoJsonToFit;
   let year;
-  let url = 'public/data/year.json';
+  let url = './data/year.json';
   let data = [];
   let currentData = [];
 
   const colors = [
-    '#F7FCF0',  // 浅绿色
-    '#E0F3DB', // 淡绿色
-    '#CCEBC5', // 中绿色
+    '#F7FCF0',  
+    '#E0F3DB', 
+    '#CCEBC5', 
     '#A8DDB5', // 绿色
     '#7BCCC4', // 浅蓝绿色
     '#43A2CA', // 深蓝绿色
