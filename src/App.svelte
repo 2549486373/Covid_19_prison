@@ -256,12 +256,13 @@ const sections = [
     <div class="title alaska-title">Alaska</div>
     <Map {geoJsonToFit} {index} />
   </div> 
-  <div class="sections-container" >
+  <div class="sections-container">
     {#each sections as section, i}
-    
       <section class="section-{i}"> 
         <div>
-          <div>{section.text}</div>
+          {#if !showPlots[i]}
+            <div>{section.text}</div>
+          {/if}
           <div class="button-container">
             {#if section.showButton}
               {#if i === 0}
@@ -315,10 +316,6 @@ const sections = [
             <div class="graph-container">
               <Graph {dataUrls} graphType="accumulatedDeaths" startDate={section.startDate} endDate={section.endDate} graphLabel="Accumulated Deaths" />
             </div>
-          </div>
-        {:else if !section.showButton}
-          <div class="text-section" in:fade={{ duration: 1000 }} out:fade={{ duration: 1000 }}>
-            {section.text}
           </div>
         {/if}
       </section>
